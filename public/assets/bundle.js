@@ -44898,16 +44898,6 @@ var Account = function (_Component) {
             }
         }
     }, {
-        key: 'componentWillUpdate',
-        value: function componentWillUpdate(nextProps, nextState) {
-            if (this.state.loading && nextState.loading) {
-                // Check All API Loaders
-                if (nextState.data_current_holdings && nextState.data_historical_balance && nextState.data_transactions) {
-                    this.setState({ loading: false });
-                }
-            }
-        }
-    }, {
         key: 'graphCurrentHoldingsData',
         value: function graphCurrentHoldingsData() {
             var info = {
@@ -45069,7 +45059,6 @@ var Account = function (_Component) {
         key: 'logout',
         value: function logout() {
             _user2.default.delete();
-            // console.log('checkIfLoggedIn()',this.checkIfLoggedIn())
             this.setState({ loggedin: false });
         }
     }, {
@@ -45083,31 +45072,14 @@ var Account = function (_Component) {
 
             if (!_user2.default.data.response) _user2.default.data.response = {};
             this.setState({ loading: true });
-            this.getCurrentHoldings().then(function (res) {
-                // console.log('current holdings success')
-                _this6.getHistoricalBalance().then(function (res) {
-                    // console.log('historical balance success')
-                    _this6.getTransactions().then(function (res) {
-                        // console.log('transaction success')
-                        _this6.graphCurrentHoldingsData();
-                        _this6.graphHistoricalBalanceData();
-                    }).catch(function (err) {
-                        return console.log('transaction fail');
-                    });
-                }).catch(function (err) {
-                    return console.log('historical balance fail');
-                });
+
+            var loadingData = Promise.all([this.getCurrentHoldings(), this.getHistoricalBalance(), this.getTransactions()]).then(function (res) {
+                _this6.setState({ loading: false });
+                _this6.graphCurrentHoldingsData();
+                _this6.graphHistoricalBalanceData();
             }).catch(function (err) {
-                return console.log('current holdings fail');
+                return console.log('error');
             });
-
-            // this.getHistoricalBalance()
-            // .then((res) => console.log('historical balance success'))
-            // .catch((err) => console.log('historical balance fail'))
-
-            // this.getTransactions()
-            // .then((res) => console.log('transaction success'))
-            // .catch((err) => console.log('transaction fail'))
         }
     }, {
         key: 'render',

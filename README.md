@@ -17,7 +17,7 @@ Quick Start
 
 1. Install Dependencies: `node install`
 
-2. Edit `/server.config.json` with the proper Hedgeable API username, private key, server uri & port to run the app.
+2. Duplicate `/sample.server.config.json` into `/server.config.json` and edit with the proper Hedgeable API username, key, server uri & port to run the app.
 File format:
 ```json
 {

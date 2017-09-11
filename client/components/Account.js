@@ -26,17 +26,6 @@ export default class Account extends Component {
         }
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        if (this.state.loading && nextState.loading) {
-            // Check All API Loaders
-            if (nextState.data_current_holdings &&
-                nextState.data_historical_balance &&
-                nextState.data_transactions) {
-                this.setState({ loading: false })
-            }
-        }
-    }
-
     graphCurrentHoldingsData() {
         let info = {
             amount: [],
@@ -190,7 +179,6 @@ export default class Account extends Component {
 
     logout() {
         user.delete()
-        // console.log('checkIfLoggedIn()',this.checkIfLoggedIn())
         this.setState({ loggedin: false })
     }
 
@@ -198,31 +186,14 @@ export default class Account extends Component {
         let { clientId, token } = user.data
         if (!user.data.response) user.data.response = {}
         this.setState({ loading: true })
-        this.getCurrentHoldings()
-            .then((res) => {
-                // console.log('current holdings success')
-                this.getHistoricalBalance()
-                    .then((res) => {
-                        // console.log('historical balance success')
-                        this.getTransactions()
-                            .then((res) => {
-                                // console.log('transaction success')
-                                this.graphCurrentHoldingsData()
-                                this.graphHistoricalBalanceData()
-                            })
-                            .catch((err) => console.log('transaction fail'))
-                    })
-                    .catch((err) => console.log('historical balance fail'))
-            })
-            .catch((err) => console.log('current holdings fail'))
 
-        // this.getHistoricalBalance()
-            // .then((res) => console.log('historical balance success'))
-            // .catch((err) => console.log('historical balance fail'))
-
-        // this.getTransactions()
-            // .then((res) => console.log('transaction success'))
-            // .catch((err) => console.log('transaction fail'))
+        let loadingData = Promise.all([
+            this.getCurrentHoldings(), this.getHistoricalBalance(), this.getTransactions()
+        ]).then((res) => {
+            this.setState({ loading: false })
+            this.graphCurrentHoldingsData()
+            this.graphHistoricalBalanceData()
+        }).catch((err) => console.log('error'))
     }
 
     render() {
