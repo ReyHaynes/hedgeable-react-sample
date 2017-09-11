@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "public/assets"),
         filename: "bundle.js",
-        publicPath: "assets"
+        publicPath: "assets/"
     },
 
     module: {
@@ -23,12 +23,6 @@ module.exports = {
                     }
                 }
             },
-            // {
-            //     test: /\.css$/,
-            //     loader: ExtractTextPlugin.extract({
-            //         loader: 'css-loader?importLoaders=1'
-            //     })
-            // },
             {
                 test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])

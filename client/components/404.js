@@ -1,4 +1,4 @@
-export const FourZeroFour = ({location}) => (
+export const FourZeroFour = ({ location }) => (
     <div id="app" className="four-zero-four">
         <h2>Route not found!</h2>
         <p>
