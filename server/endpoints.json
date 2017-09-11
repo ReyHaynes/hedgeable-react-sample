@@ -1,0 +1,18 @@
+[
+    {
+        "endpoint": "/client/login",
+        "type": "POST"
+    },
+    {
+        "endpoint": "/client/:clientId/holding/agg",
+        "type": "GET"
+    },
+    {
+        "endpoint": "/client/:clientId/assetsize/agg",
+        "type": "GET"
+    },
+    {
+        "endpoint": "/client/:clientId/transaction/all",
+        "type": "GET"
+    }
+]

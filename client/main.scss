@@ -1,0 +1,10 @@
+#root, #app {
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@import "./client/components/styles/Login";
+@import "./client/components/styles/Account";
