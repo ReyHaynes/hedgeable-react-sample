@@ -7,10 +7,12 @@ Sample app created in Node/ES6/React to:
 - Display sample user holdings
 
 Using:
-    - Front-end: React, Bootstrap, jQuery, chart.js
-    - Back-end: Node.js, Express, ssl-root-cas
-    - Build: Webpack, Babel
-    - Misc: Redbull, Music, Broken Code 😢, Fixed Code 🤓
+```
+- Front-end: React, Bootstrap, jQuery, chart.js
+- Back-end: Node.js, Express, ssl-root-cas
+- Build: Webpack, Babel
+- Misc: Redbull, Music, Broken Code 😢, Fixed Code 🤓
+```
 
 Quick Start
 -----------
