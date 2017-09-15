@@ -13,6 +13,7 @@ export default class Account extends Component {
             error: false,
             loading: false,
             loggedin: this.checkIfLoggedIn(),
+            data_all_information: false,
             data_current_holdings: false,
             data_historical_balance: false,
             data_transactions: false
@@ -109,7 +110,24 @@ export default class Account extends Component {
         return !!user.data.token
     }
 
-    getCurrentHoldings(uri, props) {
+    getAllInfomation() {
+        return new Promise((resolve, reject) => {
+            let { clientId, token } = user.data
+            this.getFromAPI(
+                `/client/${clientId}/getallinformation`,
+                { appToken:'token', usertoken:token, clientid: clientId })
+                .then((res) => {
+                    this.setState({ data_all_information: res })
+                    resolve(true)
+                })
+                .catch((err) => {
+                    this.setState({ data_all_information: false })
+                    reject(false)
+                })
+        })
+    }
+
+    getCurrentHoldings() {
         return new Promise((resolve, reject) => {
             let { clientId, token } = user.data
             this.getFromAPI(
@@ -126,7 +144,7 @@ export default class Account extends Component {
         })
     }
 
-    getHistoricalBalance(uri, props) {
+    getHistoricalBalance() {
         return new Promise((resolve, reject) => {
             let { clientId, token } = user.data
             this.getFromAPI(
@@ -143,7 +161,7 @@ export default class Account extends Component {
         })
     }
 
-    getTransactions(uri, props) {
+    getTransactions() {
         return new Promise((resolve, reject) => {
             let { clientId, token } = user.data
             this.getFromAPI(

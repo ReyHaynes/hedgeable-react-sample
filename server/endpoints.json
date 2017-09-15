@@ -4,6 +4,10 @@
         "type": "POST"
     },
     {
+        "endpoint": "/client/:clientId/getallinformation",
+        "type": "GET"
+    },
+    {
         "endpoint": "/client/:clientId/holding/agg",
         "type": "GET"
     },

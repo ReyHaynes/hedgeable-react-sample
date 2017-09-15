@@ -7,3 +7,6 @@ Updates
 ### 0.1.1
 - Adding UPDATES.md to track version changes
 - Async GET account api calls
+
+### 0.1.2
+- Separated Component UI

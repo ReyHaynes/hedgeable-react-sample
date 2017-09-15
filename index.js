@@ -6,8 +6,8 @@ import Hedgeable, { config } from './server'
 const api = new Hedgeable()
 api.connect(config.username,config.key)
     .then((results) => {
-        const apiServer = express(),
-              clientServer = express()
+        const clientServer = express(),
+              apiServer = express.Router()
 
         const sanitizeHeader = (data) => {
             let d = data
